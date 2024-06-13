@@ -23,27 +23,27 @@
 
             <li class="sidebar-item @active('admin.vendors') @active('admin.vendors.*')">
                 <a class="sidebar-link" href="{{route('admin.vendors')}}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Vendors</span>
+                    <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Vendors</span>
                 </a>
             </li>
 
             <li class="sidebar-item @active('admin.products') @active('admin.products.*')">
                 <a class="sidebar-link" href="{{route('admin.products')}}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Products</span>
+                    <i class="align-middle" data-feather="package"></i> <span class="align-middle">Products</span>
                 </a>
             </li>
 
             <li class="sidebar-item @active('admin.services') @active('admin.services.*')">
                 <a class="sidebar-link" href="{{route('admin.services')}}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Services</span>
+                    <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Services</span>
                 </a>
             </li>
 
             <li class="sidebar-item @active('admin.places') @active('admin.places.*')">
                 <a class="sidebar-link" href="{{route('admin.places')}}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Places</span>
+                    <i class="align-middle" data-feather="globe"></i> <span class="align-middle">Places</span>
                 </a>
-            </li>s
+            </li>
 
 
             {{-- <li class="sidebar-header">
