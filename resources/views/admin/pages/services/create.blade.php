@@ -41,21 +41,6 @@
                                         @endif
                                     </div>
                                     <div class="form-group mt-2">
-                                        <label for="description">Description</label>
-                                        <textarea id="description" name="description" autocomplete="off" class="form-control" placeholder="Enter description here"></textarea>
-                                        @if ($errors->has('description'))
-                                        <span class="text-danger">{{ $errors->first('description') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label for="price">price</label>
-                                        <input type="number" step="any"  id="price" name="price" autocomplete="off" class="form-control" placeholder="Enter price here">
-                                        @if ($errors->has('price'))
-                                        <span class="text-danger">{{ $errors->first('price') }}</span>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group mt-2">
                                         <label for="status">Status</label>
                                         <select name="status" id="status" class="form-control">
                                             <option value="1" selected>Active</option>

@@ -24,6 +24,7 @@ class PlaceController extends Controller
         $input = [
             'name' => $request->name,
             'description' => $request->description,
+            'location' => $request->location,
             'price' => $request->price,
             'image' => $request->image,
             'status' => $request->status
@@ -32,6 +33,7 @@ class PlaceController extends Controller
         $rules = [
            'name' => 'required',
             'description' => 'required',
+            'location' => 'required',
             'price' => 'required|numeric',
             'image' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
             'status' => 'required|numeric',
@@ -67,11 +69,13 @@ class PlaceController extends Controller
         if($item){
             $input['name'] = $request->name;
             $input['description'] = $request->description;
+            $input['location'] = $request->location;
             $input['price'] = $request->price;
             $input['status'] = $request->status;
 
             $rules['name'] = 'required';
             $rules['description'] = 'required';
+            $rules['location'] = 'required';
             $rules['price'] = 'required|numeric';
             $rules['status'] = 'required|numeric';
 

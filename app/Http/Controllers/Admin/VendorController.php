@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\User;
+use App\Models\Service;
+use App\Models\Place;
 
 class VendorController extends Controller
 {
@@ -105,6 +107,58 @@ class VendorController extends Controller
             
         }else{
             return redirect()->back()->with(['error'=>'User not found']);
+        }
+    }
+
+    public function vendor_services($id){
+        $services = Service::all()->toArray();
+        $vendor = User::where(["user_type"=>2,'id'=>$id])->with("services")->orderBy("id","desc")->first()->toArray();
+        return view("admin.pages.vendors.services",compact('vendor','services'));
+    }
+
+    public function vendor_services_attach(Request $request, $id){
+        $vendor = User::find($id);
+        if($vendor){
+            $vendor->services()->attach($request->service_id);
+            return redirect()->back()->with(["success"=>"Service added successfully"]);
+        }else{
+            return redirect()->back()->with(["error"=>"Something went wrong"]);
+        }
+    }
+
+    public function vendor_services_detach($vendor_id, $service_id){
+        $vendor = User::find($vendor_id);
+        if($vendor){
+            $vendor->services()->detach($service_id);
+            return redirect()->back()->with(["success"=>"Service deleted successfully"]);
+        }else{
+            return redirect()->back()->with(["error"=>"Something went wrong"]);
+        }
+    }
+
+    public function vendor_places($id){
+        $places = Place::all()->toArray();
+        $vendor = User::where(["user_type"=>2,'id'=>$id])->with("places")->orderBy("id","desc")->first()->toArray();
+        return view("admin.pages.vendors.places",compact('vendor','places'));
+    }
+
+    public function vendor_places_attach(Request $request, $id){
+        $vendor = User::find($id);
+        if($vendor){
+            $vendor->places()->attach($request->place_id);
+            return redirect()->back()->with(["success"=>"Place added successfully"]);
+        }else{
+            return redirect()->back()->with(["error"=>"Something went wrong"]);
+        }
+    }
+
+    public function vendor_places_detach($vendor_id, $place_id){
+        $vendor = User::find($vendor_id);
+        if($vendor){
+            $vendor->places()->detach($place_id);
+            return redirect()->back()->with(["success"=>"Place deleted successfully"]);
+        }else{
+            return redirect()->back()->with(["error"=>"Something went wrong"]);
         }
     }
 }

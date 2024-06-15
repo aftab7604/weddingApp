@@ -48,6 +48,13 @@
                                         @endif
                                     </div>
                                     <div class="form-group mt-2">
+                                        <label for="location">Location</label>
+                                        <textarea id="location" name="location" autocomplete="off" class="form-control" placeholder="Enter location here"></textarea>
+                                        @if ($errors->has('location'))
+                                        <span class="text-danger">{{ $errors->first('location') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mt-2">
                                         <label for="price">price</label>
                                         <input type="number" step="any"  id="price" name="price" autocomplete="off" class="form-control" placeholder="Enter price here">
                                         @if ($errors->has('price'))
