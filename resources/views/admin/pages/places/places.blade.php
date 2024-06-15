@@ -27,6 +27,7 @@
                                 <th></th>
                                 <th>Name</th>
                                 <th>Description</th>
+                                <th>Location</th>
                                 <th>Price</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -42,6 +43,7 @@
                                 <td><img src="{{asset('images/'.$v['image'])}}" alt="img" class="img img-fluid" style="width:50px; height:50px;"></td>
                                 <td>{{$v['name']}}</td>
                                 <td>{{$v['description']}}</td>
+                                <td>{{$v['location']}}</td>
                                 <td>{{$v['price']}}</td>
                                 <td>{{$v['status'] == 1 ? 'Active' : 'Inactive'}}</td>
                                 <td>
@@ -50,7 +52,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7">No Record Found</td>  
+                                <td colspan="8">No Record Found</td>  
                             </tr>
                             @endforelse
                             

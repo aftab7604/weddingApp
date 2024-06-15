@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string("image");
             $table->string("name");
-            $table->longText("description");
-            $table->decimal("price");
             $table->integer("status")->default(0)->comment("0=inactive|1=active");
             $table->timestamps();
             $table->softDeletes();

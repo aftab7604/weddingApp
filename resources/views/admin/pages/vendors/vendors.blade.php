@@ -43,7 +43,11 @@
                                 <td>{{$v['address']}}</td>
                                 <td>{{$v['email']}}</td>
                                 <td>
-                                    <a href="{{route('admin.vendors.edit',$v['id'])}}" class="text-warning">Edit</a> | <a href="{{route('admin.vendors.destroy',$v['id'])}}" class="text-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                                    <a href="{{route('admin.vendors.edit',$v['id'])}}" class="text-warning">Edit</a> | 
+                                    <a href="{{route('admin.vendors.destroy',$v['id'])}}" class="text-danger" onclick="return confirm('Are you sure to delete?')">Delete</a> |
+                                    <a href="{{route('admin.vendors.services',$v['id'])}}" class="text-warning">Services</a> |
+                                    <a href="{{route('admin.vendors.places',$v['id'])}}" class="text-warning">Places</a>
+                                
                                 </td>
                             </tr>
                             @empty

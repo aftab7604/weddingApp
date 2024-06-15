@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\Service;
-
+use App\Models\Product;
 
 class ServiceController extends Controller
 {
@@ -23,16 +23,12 @@ class ServiceController extends Controller
     public function store(Request $request){
         $input = [
             'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
             'image' => $request->image,
             'status' => $request->status
         ];
         
         $rules = [
-           'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
+            'name' => 'required',
             'image' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
             'status' => 'required|numeric',
         ];
@@ -66,13 +62,9 @@ class ServiceController extends Controller
         $item = Service::findOrFail($request->id);
         if($item){
             $input['name'] = $request->name;
-            $input['description'] = $request->description;
-            $input['price'] = $request->price;
             $input['status'] = $request->status;
 
             $rules['name'] = 'required';
-            $rules['description'] = 'required';
-            $rules['price'] = 'required|numeric';
             $rules['status'] = 'required|numeric';
 
             if ($request->file('image')) {
@@ -115,6 +107,32 @@ class ServiceController extends Controller
             
         }else{
             return redirect()->back()->with(['error'=>'Data not found']);
+        }
+    }
+
+    public function service_products($id){
+        $products = Product::all()->toArray();
+        $service = Service::where("id",$id)->with("products")->orderBy("id","desc")->first()->toArray();
+        return view("admin.pages.services.products",compact('service','products'));
+    }
+
+    public function service_products_attach(Request $request,$id){
+        $service = Service::find($id);
+        if($service){
+            $service->products()->attach($request->product_id);
+            return redirect()->back()->with(["success"=>"Product added successfully"]);
+        }else{
+            return redirect()->back()->with(["error"=>"Something went wrong"]);
+        }
+    }
+
+    public function service_products_detach($service_id,$product_id){
+        $service = Service::find($service_id);
+        if($service){
+            $service->products()->detach($product_id);
+            return redirect()->back()->with(["success"=>"Product deteled successfully"]);
+        }else{
+            return redirect()->back()->with(["error"=>"Something went wrong"]);
         }
     }
 }
