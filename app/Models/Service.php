@@ -20,10 +20,10 @@ class Service extends Model
     ];
 
     public function vendors(){
-        return $this->belongsToMany(User::class,'service_vendor',"service_id","vendor_id");
+        return $this->belongsToMany(User::class,'service_vendor',"service_id","vendor_id")->withPivot('id');
     }
 
     public function products(){
-        return $this->belongsToMany(Product::class,'product_service',"service_id","product_id");
+        return $this->belongsToMany(Product::class,'product_service',"service_id","product_id")->using(ProductService::class)->withPivot('id');
     }
 }

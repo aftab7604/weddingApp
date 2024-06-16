@@ -22,6 +22,6 @@ class Place extends Model
     ];
 
     public function vendors(){
-        return $this->belongsToMany(User::class,'place_vendor',"place_id","vendor_id");
+        return $this->belongsToMany(User::class,'place_vendor',"place_id","vendor_id")->using(PlaceVendor::class)->withPivot("id");
     }
 }

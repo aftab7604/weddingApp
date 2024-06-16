@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Service;
+use App\Models\Order;
 
 class Product extends Model
 {
@@ -21,7 +22,11 @@ class Product extends Model
     ];
 
     public function services(){
-        return $this->belongsToMany(Service::class,'product_service',"product_id","service_id");
+        return $this->belongsToMany(Service::class,'product_service',"product_id","service_id")->using(ProductService::class)->withPivot("id");
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class,'order_product',"product_id","order_id");
     }
 
 }
