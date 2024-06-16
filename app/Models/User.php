@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 use App\Models\Service;
 use App\Models\Place;
 
@@ -52,11 +53,11 @@ class User extends Authenticatable
     ];
 
     public function services(){
-        return $this->belongsToMany(Service::class,'service_vendor',"vendor_id","service_id");
+        return $this->belongsToMany(Service::class,'service_vendor',"vendor_id","service_id")->withPivot('id');
     }
 
     public function places(){
-        return $this->belongsToMany(Place::class,'place_vendor',"vendor_id","place_id");
+        return $this->belongsToMany(Place::class,'place_vendor',"vendor_id","place_id")->using(PlaceVendor::class)->withPivot("id");
     }
     
 }

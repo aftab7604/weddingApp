@@ -28,7 +28,7 @@ class UserController extends Controller
             'address' => $request->address,
             'wedding_date' => $request->wedding_date,
             'email' => $request->email,
-            'password' => $request->password
+            'password' => Hash::make($request->password)
         ];
         
         $rules = [
@@ -82,7 +82,7 @@ class UserController extends Controller
             }
 
             if(!empty($request->password)){
-                $input['password'] = $request->password;
+                $input['password'] = Hash::make($request->password);
                 $rules['password'] = 'required|min:6';
             }
             
