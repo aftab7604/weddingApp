@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\PlaceController;
+use App\Http\Controllers\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,5 +81,8 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get("/places/edit/{id}",[PlaceController::class,"edit"])->name("admin.places.edit");
     Route::post("/places/update",[PlaceController::class,"update"])->name("admin.places.update");
     Route::get("/places/destroy/{id}",[PlaceController::class,"destroy"])->name("admin.places.destroy");
+
+    Route::get("/orders",[OrderController::class,"index"])->name("admin.orders");
+    Route::get("/order/{id}",[OrderController::class,"get_single_order"])->name("admin.orders.single");
 });
 

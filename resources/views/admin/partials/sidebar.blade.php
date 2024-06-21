@@ -45,6 +45,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item @active('admin.orders') @active('admin.orders.*')">
+                <a class="sidebar-link" href="{{route('admin.orders')}}">
+                    <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Orders</span>
+                </a>
+            </li>
+
 
             {{-- <li class="sidebar-header">
                 Plugins & Addons

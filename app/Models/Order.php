@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Product;
+use App\Models\Place;
+use App\Models\User;
+use App\Models\OrderItem;
 
 class Order extends Model
 {
@@ -19,10 +21,19 @@ class Order extends Model
         "order_date",
     ];
 
-    public function products(){
-        return $this->belongsToMany(Product::class,'order_product',"order_id","product_id");
+    public function place()
+    {
+        return $this->belongsTo(Place::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
 }
