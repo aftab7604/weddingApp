@@ -15,7 +15,7 @@ class VendorController extends Controller
 
     public function show($id)
     {
-        $vendor = Vendor::with(['services.products', 'places'])->findOrFail($id);
+        $vendor = User::with(['services.products', 'places'])->findOrFail($id);
         return response()->json($vendor);
     }
 }

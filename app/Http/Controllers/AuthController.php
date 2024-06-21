@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -10,32 +11,42 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $request->validate([
+        $rules = [
             'email' => 'required|email',
             'password' => 'required',
-        ]);
+        ];
 
-        $credentials = $request->only('email', 'password');
-        
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
-
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
             return response()->json([
-                'success'=>true,
-                'message'=>'User Logged in',
-                'token' => $token
-            ], 200);
-        }
+                "success"=>false,
+                "message"=>"Invalid Request - Validation erros",
+                "errors"=>$validator->getMessageBag()->toArray()
+            ], 202);
+        }else{
+
+            $credentials = $request->only('email', 'password');
+            
+
+            if (Auth::attempt($credentials)) {
+                $user = Auth::user();
+                $token = $user->createToken('authToken')->plainTextToken;
+
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'User Logged in',
+                    'token' => $token
+                ], 200);
+            }
 
       
 
-        return response()->json([
-            'success'=>false,
-            'message' => 'Invalid credentials',
-            'token' => null
-        ], 401);
+            return response()->json([
+                'success'=>false,
+                'message' => 'Invalid credentials',
+                'token' => null
+            ], 401);
+        }
     }
 
     public function logout(Request $request)
